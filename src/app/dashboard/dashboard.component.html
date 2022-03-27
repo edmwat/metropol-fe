@@ -1,1 +1,15 @@
 <p>dashboard works!</p>
+{{loggedinUser}}
+<br>
+
+<button (click)="createAccount()">create account</button>
+<br>
+<button (click)="createCard()">create Card</button>
+<p>list</p>
+<div >
+    <ul *ngFor="let acc of accounts">
+        <li>{{acc.id}} &nbsp;&nbsp;{{acc.iban}}&nbsp;&nbsp;{{acc.bicSwift}}&nbsp;&nbsp;{{acc.clientId}} <button (click)="deleteAccount(acc.id)">Delete acc</button></li> 
+    </ul>
+</div>
+
+<router-outlet></router-outlet>

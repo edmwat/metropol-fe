@@ -1,0 +1,44 @@
+<div fxFlex="40%" fxLayout="column" >
+    <mat-card>       
+        <p>
+            <mat-card-title><h1>Log In</h1></mat-card-title>
+        </p>
+        <!-- <h3 style="color:#FF4081">{{validationError}}</h3> -->
+        <form [formGroup]="formGroup" (ngSubmit)="addAccount()">
+            <p>
+                <mat-form-field fxFlex="80%">
+                    <mat-label>Id</mat-label>
+                    <input matInput formControlName="id" placeholder="e.g 1235" required>
+                   
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field fxFlex="80%">
+                    <mat-label>iban</mat-label>
+                    <input matInput formControlName="iban" placeholder="e.g 1235" required>
+                    
+                </mat-form-field>
+            </p> 
+            <p>
+                <mat-form-field fxFlex="80%">
+                    <mat-label>bicSwift</mat-label>
+                    <input matInput formControlName="bicSwift" placeholder="e.g 1235" required>
+                   
+                </mat-form-field>
+            </p> 
+            <p>
+                <mat-form-field fxFlex="80%">
+                    <mat-label>clientId</mat-label>
+                    <input matInput formControlName="clientId" placeholder="e.g 1235" required>
+                    
+                </mat-form-field>
+            </p> 
+            <div fxLayout="row" fxLayoutAlign="space-around space-around">
+                <div>
+                    <button type="submit" mat-flat-button color="primary" mat-button>Add new</button>
+                </div>
+               
+            </div> 
+        </form> 
+    </mat-card> 
+</div>

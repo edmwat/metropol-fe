@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthErrorResponse } from '../models/auth-error-response';
+import { LoggedInUser } from '../models/logged-in-user';
 import { LoginRequest } from '../models/loginRequest';
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -18,15 +19,16 @@ export class LoginComponent implements OnInit {
   constructor(private _formBuilder:FormBuilder, 
     private authenticationService:AuthenticationService,
     private router:Router) { 
-      console.log("Login component called")
-    this.authenticationService.getLoggedinUser().subscribe((res:AuthErrorResponse)=>{
-      if(res.errorCode == 401){
-        this.router.navigate(['/login']);
-        return;
+     console.log("Login component called")
+    this.authenticationService.getLoggedinUser().subscribe((res:LoggedInUser)=>{
+     // Console.log(res.username);
+      if(res.username){
+        this.router.navigate(['/dashboard']);
+        //return;
+      }else{
+        this.router.navigate(['/login']); 
       }
-      console.log(res.errorCode);
-      console.log(res.message);
-      this.router.navigate(['/dashboard']);
+         
     },(error:any)=>{
       console.log("ERROR GETTING LOGGEDINUSER:"+error);
       
@@ -52,7 +54,7 @@ export class LoginComponent implements OnInit {
       this.validationError ="";
      
       this.authenticationService.authenticate(loginReq);
-      this.formGroup.reset();
+      //this.formGroup.reset();
     }else{
       this.validationError ="Kindly complete the form!";
     } 
