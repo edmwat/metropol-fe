@@ -10,7 +10,7 @@ import { AuthGuardChild } from './services/child-guard';
 
 const routes: Routes = [
   {path:'login', component:LoginComponent},
-  {path:'dashboard',canActivate:[AuthGuard],canActivateChild:[AuthGuardChild], children:[
+  {path:'dashboard', children:[
     {path:'account', component:AccountsComponent},
     {path:'card',component:CardComponent}
   ], component:DashboardComponent},

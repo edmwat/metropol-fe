@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, RouterEvent } from '@angular/router';
 import { Account } from '../models/account';
 import { AccountsService } from '../services/accounts.service';
 
@@ -11,7 +12,7 @@ import { AccountsService } from '../services/accounts.service';
 export class AccountsComponent implements OnInit {
   formGroup!: FormGroup;
 
-  constructor(private _formBuilder:FormBuilder, private accountService:AccountsService) { }
+  constructor(private _formBuilder:FormBuilder, private accountService:AccountsService,private router:Router) { }
 
   ngOnInit(): void {
     this.formGroup = this._formBuilder.group({
@@ -31,7 +32,7 @@ export class AccountsComponent implements OnInit {
     account.clientId = this.formGroup.controls['clientId'].value
 
     this.accountService.addNewAccount(account);
-
+    this.router.navigate(['dashboard']);
 
   }
 

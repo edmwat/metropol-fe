@@ -1,21 +1,64 @@
-<p>dashboard works!</p>
-{{loggedinUser}}
-<br>
+<div class="container">
+    <button mat-flat-button color="primary" (click)="createAccount()">Create new Account</button> &nbsp;&nbsp;
 
-<button (click)="createAccount()">create account</button>
-<br>
-<button (click)="createCard()">create Card</button>
-<p>list</p>
-<div >
-    <ul *ngFor="let acc of accounts">
-        <li>{{acc.id}} &nbsp;&nbsp;{{acc.iban}}&nbsp;&nbsp;{{acc.bicSwift}}&nbsp;&nbsp;{{acc.clientId}} <button (click)="deleteAccount(acc.id)">Delete acc</button><button (click)="showCards(acc.id)">Show cards</button></li> 
-    </ul>
+    <button mat-flat-button color="accent" (click)="createCard()">Create new Card</button>
 </div>
-<div *ngIf="cards">
-    <h1>Cards</h1>
-    <ul *ngFor="let card of cards">
-        <li>{{card.id}}&nbsp;&nbsp;{{card.alias}}&nbsp;&nbsp;{{card.accountId}}&nbsp;&nbsp;{{card.cardType}}&nbsp;&nbsp;<button (click)="deleteCard(card.id)">Delete card</button></li>
-    </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Accounts</h3>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Iban</th>
+                        <th scope="col">bicSwift</th>
+                        <th scope="col">client Id</th>
+                      </tr>
+                </thead>
+                <tbody *ngFor="let acc of accounts">
+                  <tr>
+                    <td>{{acc.id}}</td>
+                    <td>{{acc.iban}}</td>
+                    <td>{{acc.bicSwift}}</td>
+                    <td>{{acc.clientId}}</td>
+                    <td>
+                        <button mat-button color="primary" (click)="showCards(acc.id)">Show Cards</button>&nbsp;|&nbsp;<button mat-button color="accent" (click)="deleteAccount(acc.id)">DELETE</button></td>
+                    
+                  </tr>
+                  
+                </tbody>
+              </table>
+        </div>
+        <div *ngIf="cards" class="col-md-6" >
+            <h3>Cards</h3>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Alias</th>
+                        <th scope="col">Client Id</th>
+                        <th scope="col">Card Type</th>
+                      </tr>
+                </thead>
+                <tbody *ngFor="let card of cards">
+                  <tr>
+                    <td>{{card.id}}</td>
+                    <td>{{card.alias}}</td>
+                    <td>{{card.accountId}}</td>
+                    <td>{{card.cardType}}</td>
+                    <td>
+                        <button mat-button color="accent" (click)="deleteCard(card.id)">DELETE</button>
+                    </td>
+                    
+                  </tr>
+                  
+                </tbody>
+              </table>
+        </div>
+    </div>
 </div>
-
-<router-outlet></router-outlet>
+<hr>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

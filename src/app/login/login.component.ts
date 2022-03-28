@@ -19,12 +19,12 @@ export class LoginComponent implements OnInit {
   constructor(private _formBuilder:FormBuilder, 
     private authenticationService:AuthenticationService,
     private router:Router) { 
-     console.log("Login component called")
+    /*  console.log("Login component called")
     this.authenticationService.getLoggedinUser().subscribe((res:LoggedInUser)=>{
-     // Console.log(res.username);
       if(res.username){
+        console.log("logiidaaaaaaaaaaaaa"+res.username)
         this.router.navigate(['/dashboard']);
-        //return;
+        return;
       }else{
         this.router.navigate(['/login']); 
       }
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     },(error:any)=>{
       console.log("ERROR GETTING LOGGEDINUSER:"+error);
       
-    });
+    }); */
 
   }
 

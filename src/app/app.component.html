@@ -1,6 +1,12 @@
-<div class="toolbar" color="primary">
-  <a routerLink="/home">Home</a>&nbsp;&nbsp;&nbsp;
-  <a routerLink="/login">Login</a>&nbsp;&nbsp;&nbsp;
-  <a routerLink="/dashboard">Dashboard</a>
-</div>
+<p>
+  <mat-toolbar color="primary">
+  <span>Metropol</span>
+
+  <button mat-button routerLink="/home"> Home</button>
+  <button *ngIf="!loggedinUser" mat-button routerLink="/login"> Login</button>
+  <span class="example-spacer"></span>
+  <button *ngIf="loggedinUser" mat-button routerLink="/dashboard"> Dashboard</button>
+  {{loggedinUser}}
+</mat-toolbar>
+</p>
 <router-outlet></router-outlet>

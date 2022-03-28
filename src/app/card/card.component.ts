@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Card } from '../models/card';
 import { CardService } from '../services/card-service';
 
@@ -11,7 +12,7 @@ import { CardService } from '../services/card-service';
 export class CardComponent implements OnInit {
   formGroup!: FormGroup;
 
-  constructor(private _formBuilder:FormBuilder,private cardService:CardService) { }
+  constructor(private _formBuilder:FormBuilder,private cardService:CardService, private router:Router) { }
 
   ngOnInit(): void {
     this.formGroup = this._formBuilder.group({
@@ -31,6 +32,7 @@ export class CardComponent implements OnInit {
     card.cardType = this.formGroup.controls['cardType'].value
 
     this.cardService.addNewCard(card);
+    this.router.navigate(['dashboard']);
   }
 
 }
