@@ -8,7 +8,13 @@
 <p>list</p>
 <div >
     <ul *ngFor="let acc of accounts">
-        <li>{{acc.id}} &nbsp;&nbsp;{{acc.iban}}&nbsp;&nbsp;{{acc.bicSwift}}&nbsp;&nbsp;{{acc.clientId}} <button (click)="deleteAccount(acc.id)">Delete acc</button></li> 
+        <li>{{acc.id}} &nbsp;&nbsp;{{acc.iban}}&nbsp;&nbsp;{{acc.bicSwift}}&nbsp;&nbsp;{{acc.clientId}} <button (click)="deleteAccount(acc.id)">Delete acc</button><button (click)="showCards(acc.id)">Show cards</button></li> 
+    </ul>
+</div>
+<div *ngIf="cards">
+    <h1>Cards</h1>
+    <ul *ngFor="let card of cards">
+        <li>{{card.id}}&nbsp;&nbsp;{{card.alias}}&nbsp;&nbsp;{{card.accountId}}&nbsp;&nbsp;{{card.cardType}}&nbsp;&nbsp;<button (click)="deleteCard(card.id)">Delete card</button></li>
     </ul>
 </div>
 

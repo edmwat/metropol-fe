@@ -23,7 +23,6 @@ export class CardComponent implements OnInit {
   }
 
   addNewCard(){
-    console.log("add account method calldd");
     let card = new Card();
     
     card.id = this.formGroup.controls['id'].value

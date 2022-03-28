@@ -12,18 +12,17 @@ import { Card } from "../models/card";
 
     constructor(private http:HttpClient) { }
 
-    getAccountCards():Observable<Card[]>{
-        return this.http.get<Card[]>(this.baseUrl+"/accounts/all",{responseType:'json'});
-      }
-      addNewCard(account:Card){
-        const myheader = new HttpHeaders();
-         myheader.set('Content-Type', 'application/json')
+    getAccountCards(accId:any):Observable<Card[]>{
+        return this.http.get<Card[]>(this.baseUrl+"/cards/"+accId,{responseType:'json'});
+    }
+    addNewCard(account:Card){
+      const myheader = new HttpHeaders();
+       myheader.set('Content-Type', 'application/json')
+  
+     this.http.post(this.baseUrl+"/cards/add", account,{headers:myheader}).subscribe();
+    }
     
-       this.http.post(this.baseUrl+"/accounts/add", account,{headers:myheader}).subscribe();
-      }
-      
-      deleteCard(accountId:any){
-        this.http.delete(this.baseUrl+"/accounts/"+accountId).subscribe();
-      }
-
+    deleteCard(accountId:any){
+      this.http.delete(this.baseUrl+"/cards/"+accountId).subscribe();
+    }
   }
