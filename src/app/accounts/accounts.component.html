@@ -6,28 +6,28 @@
         <p>
             <mat-form-field >
                 <mat-label>Id</mat-label>
-                <input matInput formControlName="id" placeholder="e.g 1235" required>
+                <input matInput formControlName="id"  required>
                
             </mat-form-field>
         </p>
         <p>
             <mat-form-field >
                 <mat-label>iban</mat-label>
-                <input matInput formControlName="iban" placeholder="e.g 1235" required>
-                
+                <input matInput formControlName="iban"  required>
+              
             </mat-form-field>
         </p> 
         <p>
             <mat-form-field>
                 <mat-label>bicSwift</mat-label>
-                <input matInput formControlName="bicSwift" placeholder="e.g 1235" required>
+                <input matInput formControlName="bicSwift" required>
                
             </mat-form-field>
         </p> 
         <p>
             <mat-form-field >
                 <mat-label>clientId</mat-label>
-                <input matInput formControlName="clientId" placeholder="e.g 1235" required>
+                <input matInput formControlName="clientId" value="{{loggedinUser}}" readonly required>
                 
             </mat-form-field>
         </p> 
