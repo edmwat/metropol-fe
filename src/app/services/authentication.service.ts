@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -20,22 +20,13 @@ export class AuthenticationService {
      const myheader = new HttpHeaders();
      myheader.set('Content-Type', 'application/json')
 
-   this.http.post<AuthenticationResponse>(this.baseUrl+"/authenticate", cred,{headers:myheader})
-     .subscribe((data:AuthenticationResponse) => {  
-       console.log("after login: "+data.jwt)
-         window.localStorage.removeItem("access_token");  
-         window.localStorage.setItem("access_token",data.jwt); 
-         console.log("before redirect!!!!!!!!!!!!")
-         this.router.navigate(['/dashboard']);
-       
-     },error=>{
-       console.log("Error from server: "+error.message)
-     });
+    return this.http.post<any>(this.baseUrl+"/authenticate", cred,{headers:myheader})
+     
    }
    isLoggedin(){
 
    }
-   getLoggedinUser():Observable<LoggedInUser>{
-     return this.http.get<LoggedInUser>(this.baseUrl+"/authenticatedPrincipal",{responseType:'json'});
+   getLoggedinUser():Observable<any>{
+     return this.http.get<any>(this.baseUrl+"/authenticatedPrincipal",{responseType:'json'});
    }
 }

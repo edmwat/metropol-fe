@@ -1,7 +1,9 @@
-<div class="login-form" fxFlex="40%" fxLayout="column" >
-    <mat-card>       
+<div class="login-form" fxFlex="40%" fxLayout="column">
+    <mat-card  fxFlex="50%">       
         <p>
             <mat-card-title><h1>Log In</h1></mat-card-title>
+            <mat-card-subtitle >{{login_status}}</mat-card-subtitle>
+
         </p>
         <!-- <h3 style="color:#FF4081">{{validationError}}</h3> -->
         <form [formGroup]="formGroup" (ngSubmit)="login()">

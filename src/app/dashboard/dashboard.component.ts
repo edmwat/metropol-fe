@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -26,28 +27,29 @@ export class DashboardComponent implements OnInit {
      private router:Router) { }
 
   ngOnInit(): void {
-    console.log("dashboard::")
-    this.authenticationService.getLoggedinUser().subscribe(res=>{
-      this.loggedinUser = res.username;
-    })
     this.getUserAccounts();
   }
 
   getUserAccounts(){
     this.accountService.getUserAccount().subscribe(res=>{
-      console.log("getUserAccounts()")
       this.accounts = res;
+  }, (error:HttpErrorResponse)=>{
+    if(error.status == 401){
+      this.router.navigate(['/login']);
+    }
   })
 }
 showCards(accId:any){
   this.cardService.getAccountCards(accId).subscribe(res=>{
-    console.log("getUserAccounts()")
     this.cards = res;
+}, (error:HttpErrorResponse)=>{
+  if(error.status == 401){
+    this.router.navigate(['/login']);
+  }
 })
 }
   
   deleteAccount(accountId:any){
-    console.log("account to delete "+accountId);
     this.accountService.deleteAccount(accountId)
     this.getUserAccounts();
   }

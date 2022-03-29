@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthErrorResponse } from '../models/auth-error-response';
+import { AuthenticationResponse } from '../models/auth-response';
 import { LoggedInUser } from '../models/logged-in-user';
 import { LoginRequest } from '../models/loginRequest';
 import { AuthenticationService } from '../services/authentication.service';
@@ -12,6 +14,7 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  login_status:string="";
   formGroup!: FormGroup;
   validationError:string = "";
   isSubmitted:boolean = false;
@@ -19,21 +22,10 @@ export class LoginComponent implements OnInit {
   constructor(private _formBuilder:FormBuilder, 
     private authenticationService:AuthenticationService,
     private router:Router) { 
-    /*  console.log("Login component called")
-    this.authenticationService.getLoggedinUser().subscribe((res:LoggedInUser)=>{
-      if(res.username){
-        console.log("logiidaaaaaaaaaaaaa"+res.username)
-        this.router.navigate(['/dashboard']);
-        return;
-      }else{
-        this.router.navigate(['/login']); 
-      }
-         
-    },(error:any)=>{
-      console.log("ERROR GETTING LOGGEDINUSER:"+error);
-      
-    }); */
 
+    this.authenticationService.getLoggedinUser().subscribe((res:LoggedInUser)=>{
+      this.router.navigate(['/dashboard'])
+    },(error:HttpErrorResponse)=>{}); 
   }
 
   ngOnInit(): void {
@@ -53,15 +45,24 @@ export class LoginComponent implements OnInit {
     if(loginReq.username !="" && loginReq.password ){
       this.validationError ="";
      
-      this.authenticationService.authenticate(loginReq);
-      //this.formGroup.reset();
+      this.authenticationService.authenticate(loginReq).subscribe((data:AuthenticationResponse) => {  
+        console.log("successfull authentication")
+        
+          window.localStorage.removeItem("access_token");  
+          window.localStorage.setItem("access_token",data.jwt); 
+          this.login_status ="Login Success";
+          this.router.navigate(['/dashboard']);
+        
+      },(error:HttpErrorResponse)=>{
+        this.login_status = error.error.message;
+      });
     }else{
       this.validationError ="Kindly complete the form!";
     } 
-    
   }
   get formControls(){
     return this.formGroup['controls'];
   }
+ 
 
 }

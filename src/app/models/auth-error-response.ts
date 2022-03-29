@@ -1,4 +1,4 @@
-export class AuthErrorResponse{
-    message:string="";
-    errorCode:number=0;
+export interface AuthErrorResponse{
+    message:string;
+    errorCode:number;
 }
